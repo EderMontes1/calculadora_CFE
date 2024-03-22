@@ -1,4 +1,5 @@
 #calculadora Tarifas CFE
+#Solo tarifa domestica
 
 consumoMensual = (int(input("Ingresa tu consumo Mensual: ")))
 consumoBimestre = consumoMensual * 2
