@@ -20,8 +20,6 @@ class crearVentana(tk.Tk):
         self.tarifaExcedente = 3.646
         self.iva_vigente = 0.16
        
-        
-
         #Se modifica el tamaño de ventana
         self.geometry("400x300")
 
@@ -34,17 +32,17 @@ class crearVentana(tk.Tk):
 
     def _crearComponentes(self):
         titulo = ttk.Label(self, text="Calculadora Consumo CFE" , font=16).place(x=110, y=30)
-        etiqueta_Inicial = ttk.Label(self, text="Ingresa tu consumo inicial:").place(x=100, y=80)
-        etiqueta_Final = ttk.Label(self, text="Ingresa tu consumo final:").place(x=100, y=120)
+        etiqueta_Inicial = ttk.Label(self, text="Ingresa tu consumo inicial en KWh:").place(x=100, y=80)
+        etiqueta_Final = ttk.Label(self, text="Ingresa tu consumo final en KWh:").place(x=100, y=120)
         etiqueta2 = ttk.Label(self, text="Tu consumo bimestral es de: ").place(x=100, y=170)
         etiqueta3 = ttk.Label(self, text="Tu total a pagar aproximado es de: ").place(x=100, y=200)
 
         #Boton Entry (Se debe separar el .place en 2 lineas o dara como resultado un error)
         self.entrada_inicial = ttk.Entry(self, width=4, justify=tk.CENTER)
-        self.entrada_inicial.place(x=280, y=80)
+        self.entrada_inicial.place(x=290, y=80)
 
         self.entrada_final = ttk.Entry(self, width=4, justify=tk.CENTER)
-        self.entrada_final.place(x=280, y=120)
+        self.entrada_final.place(x=290, y=120)
         
         #Boton Calcular
         boton_calcular = ttk.Button(self, text="Calcular consumo", command=self.enviar).place(x=150, y=250)
@@ -76,7 +74,7 @@ class crearVentana(tk.Tk):
         
     def salir(self):
         self.quit() #Cerrar Ventana
-        self.destroy() #Destruye Objeto
+        self.destroy() #Destruye el Objeto
         sys.exit() #Termina el proceso
         
 
