@@ -39,10 +39,10 @@ class crearVentana(tk.Tk):
 
         #Boton Entry (Se debe separar el .place en 2 lineas o dara como resultado un error)
         self.entrada_inicial = ttk.Entry(self, width=4, justify=tk.CENTER)
-        self.entrada_inicial.place(x=290, y=80)
+        self.entrada_inicial.place(x=310, y=80)
 
         self.entrada_final = ttk.Entry(self, width=4, justify=tk.CENTER)
-        self.entrada_final.place(x=290, y=120)
+        self.entrada_final.place(x=310, y=120)
         
         #Boton Calcular
         boton_calcular = ttk.Button(self, text="Calcular consumo", command=self.enviar).place(x=150, y=250)
