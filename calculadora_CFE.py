@@ -15,8 +15,8 @@ class crearVentana(tk.Tk):
         #variables
         self.consumoBimestral = tk.IntVar(value="")
         self.pagoTotal = tk.IntVar(value="")
-        self.tarifaBasico = 1.023 * 75
-        self.tarifaIntermedio = 1.247 * 65
+        self.tarifaBasico = 1.023 * 150
+        self.tarifaIntermedio = 1.247 * 130
         self.tarifaExcedente = 3.646
         self.iva_vigente = 0.16
        
@@ -55,13 +55,14 @@ class crearVentana(tk.Tk):
         consumoMensual = int(self.entrada_final.get()) - int((self.entrada_inicial.get()))
         self.consumoBimestral.set(consumoMensual)
         
-        if self.consumoBimestral.get() >= 140: #Tarifa  Mayor a 140 KwH
-            self.pago = float((self.tarifaBasico + self.tarifaIntermedio) + (self.tarifaExcedente * (self.consumoBimestral.get() - 140)))
+        if self.consumoBimestral.get() > 280: #Tarifa Excedente. Cuando es > a 280 KwH
+            self.pago = float((self.tarifaBasico + self.tarifaIntermedio) + (self.tarifaExcedente * (self.consumoBimestral.get() - 280)))
             
-        elif self.consumoBimestral.get() > 0 and self.consumoBimestral.get() < 76: #Tarifa > 0 y < 76 KwH
+        elif self.consumoBimestral.get() > 0 and self.consumoBimestral.get() < 151: #Tarifa Basica > 0 y < 151 KwH
             self.pago = float((self.consumoBimestral.get() * 1.023))
-        elif self.consumoBimestral.get() > 75 and self.consumoBimestral.get() < 140: #Tarifa >75 y < 140 KwH
-            self.pago = float((self.tarifaBasico) + (self.consumoBimestral.get() - 75) * 1.24)
+
+        elif self.consumoBimestral.get() > 150 and self.consumoBimestral.get() < 281: #Tarifa Intermdia >151 y < 281 KwH
+            self.pago = float((self.tarifaBasico) + (self.consumoBimestral.get() - 150) * 1.247)
        
         return self.pagoTotal.set(round(float(self.pago * self.iva_vigente + (self.pago)),2)) #(Pago * IVA) + Pago Y se asigna el valor a la variable de la etiqueta pago total.
     
