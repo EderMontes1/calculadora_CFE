@@ -21,10 +21,11 @@ class crearVentana(tk.Tk):
         self.iva_vigente = 0.16
        
         #Se modifica el tamaño de ventana
-        self.geometry("400x300")
+        self.geometry("400x320")
 
         #Se modifica el titulo de la ventana
         self.title("Calculadora CFE")
+        self.iconbitmap("D:/Desarrollo/Python/apps/calculadora_CFE/logo_cfe.ico")
         self.resizable(0,0)#Bloquear ventana 
         self._crearComponentes()
         self.crear_menu()
