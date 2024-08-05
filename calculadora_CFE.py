@@ -19,7 +19,7 @@ class crearVentana(tk.Tk):
         self.tarifaIntermedio = 1.247 * 130
         self.tarifaExcedente = 3.646
         self.iva_vigente = 0.16
-       
+
         #Se modifica el tamaño de ventana
         self.geometry("400x320")
 
@@ -64,7 +64,7 @@ class crearVentana(tk.Tk):
 
         elif self.consumoBimestral.get() > 150 and self.consumoBimestral.get() < 281: #Tarifa Intermdia >151 y < 281 KwH
             self.pago = float((self.tarifaBasico) + (self.consumoBimestral.get() - 150) * 1.247)
-       
+
         return self.pagoTotal.set(round(float(self.pago * self.iva_vigente + (self.pago)),2)) #(Pago * IVA) + Pago Y se asigna el valor a la variable de la etiqueta pago total.
 
     def crear_menu(self):
