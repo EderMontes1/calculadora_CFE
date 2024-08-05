@@ -19,13 +19,13 @@ class crearVentana(tk.Tk):
         self.tarifaIntermedio = 1.247 * 130
         self.tarifaExcedente = 3.646
         self.iva_vigente = 0.16
-
-
+       
         #Se modifica el tamaño de ventana
-        self.geometry("400x300")
+        self.geometry("400x320")
 
         #Se modifica el titulo de la ventana
         self.title("Calculadora CFE")
+        self.iconbitmap("D:/Desarrollo/Python/apps/calculadora_CFE/logo_cfe.ico")
         self.resizable(0,0)#Bloquear ventana 
         self._crearComponentes()
         self.crear_menu()
@@ -33,17 +33,17 @@ class crearVentana(tk.Tk):
 
     def _crearComponentes(self):
         titulo = ttk.Label(self, text="Calculadora Consumo CFE" , font=16).place(x=110, y=30)
-        etiqueta_Inicial = ttk.Label(self, text="Ingresa tu consumo inicial:").place(x=100, y=80)
-        etiqueta_Final = ttk.Label(self, text="Ingresa tu consumo final:").place(x=100, y=120)
+        etiqueta_Inicial = ttk.Label(self, text="Ingresa tu consumo inicial en KWh:").place(x=100, y=80)
+        etiqueta_Final = ttk.Label(self, text="Ingresa tu consumo final en KWh:").place(x=100, y=120)
         etiqueta2 = ttk.Label(self, text="Tu consumo bimestral es de: ").place(x=100, y=170)
         etiqueta3 = ttk.Label(self, text="Tu total a pagar aproximado es de: ").place(x=100, y=200)
 
         #Boton Entry (Se debe separar el .place en 2 lineas o dara como resultado un error)
         self.entrada_inicial = ttk.Entry(self, width=4, justify=tk.CENTER)
-        self.entrada_inicial.place(x=280, y=80)
+        self.entrada_inicial.place(x=310, y=80)
 
         self.entrada_final = ttk.Entry(self, width=4, justify=tk.CENTER)
-        self.entrada_final.place(x=280, y=120)
+        self.entrada_final.place(x=310, y=120)
         
         #Boton Calcular
         boton_calcular = ttk.Button(self, text="Calcular consumo", command=self.enviar).place(x=150, y=250)
@@ -56,13 +56,15 @@ class crearVentana(tk.Tk):
         consumoMensual = int(self.entrada_final.get()) - int((self.entrada_inicial.get()))
         self.consumoBimestral.set(consumoMensual)
         
-        if self.consumoBimestral.get() >= 280: #Tarifa Excedente Mayor a 280 KwH
+        if self.consumoBimestral.get() > 280: #Tarifa Excedente. Cuando es > a 280 KwH
             self.pago = float((self.tarifaBasico + self.tarifaIntermedio) + (self.tarifaExcedente * (self.consumoBimestral.get() - 280)))
             
-        elif self.consumoBimestral.get() > 0 and self.consumoBimestral.get() < 151: #Tarifa > 0 y < 151 KwH #Calculo Tarifa Basica
+        elif self.consumoBimestral.get() > 0 and self.consumoBimestral.get() < 151: #Tarifa Basica > 0 y < 151 KwH
             self.pago = float((self.consumoBimestral.get() * 1.023))
-        elif self.consumoBimestral.get() > 150 and self.consumoBimestral.get() < 280: #Tarifa >150 y < 280 KwH Calculo Tarifa Intermedia
-            self.pago = float((self.tarifaBasico) + (self.consumoBimestral.get() - 150) * 1.24)
+
+        elif self.consumoBimestral.get() > 150 and self.consumoBimestral.get() < 281: #Tarifa Intermdia >151 y < 281 KwH
+            self.pago = float((self.tarifaBasico) + (self.consumoBimestral.get() - 150) * 1.247)
+       
         return self.pagoTotal.set(round(float(self.pago * self.iva_vigente + (self.pago)),2)) #(Pago * IVA) + Pago Y se asigna el valor a la variable de la etiqueta pago total.
 
     def crear_menu(self):
@@ -74,7 +76,7 @@ class crearVentana(tk.Tk):
         
     def salir(self):
         self.quit() #Cerrar Ventana
-        self.destroy() #Destruye Objeto
+        self.destroy() #Destruye el Objeto
         sys.exit() #Termina el proceso
 
 
