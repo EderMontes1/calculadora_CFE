@@ -15,12 +15,11 @@ class crearVentana(tk.Tk):
         #variables
         self.consumoBimestral = tk.IntVar(value="")
         self.pagoTotal = tk.IntVar(value="")
-        self.tarifaBasico = 1.023 * 75
-        self.tarifaIntermedio = 1.247 * 65
+        self.tarifaBasico = 1.023 * 150
+        self.tarifaIntermedio = 1.247 * 130
         self.tarifaExcedente = 3.646
         self.iva_vigente = 0.16
-       
-        
+
 
         #Se modifica el tamaño de ventana
         self.geometry("400x300")
@@ -57,16 +56,15 @@ class crearVentana(tk.Tk):
         consumoMensual = int(self.entrada_final.get()) - int((self.entrada_inicial.get()))
         self.consumoBimestral.set(consumoMensual)
         
-        if self.consumoBimestral.get() >= 140: #Tarifa  Mayor a 140 KwH
-            self.pago = float((self.tarifaBasico + self.tarifaIntermedio) + (self.tarifaExcedente * (self.consumoBimestral.get() - 140)))
+        if self.consumoBimestral.get() >= 280: #Tarifa Excedente Mayor a 280 KwH
+            self.pago = float((self.tarifaBasico + self.tarifaIntermedio) + (self.tarifaExcedente * (self.consumoBimestral.get() - 280)))
             
-        elif self.consumoBimestral.get() > 0 and self.consumoBimestral.get() < 76: #Tarifa > 0 y < 76 KwH
+        elif self.consumoBimestral.get() > 0 and self.consumoBimestral.get() < 151: #Tarifa > 0 y < 151 KwH #Calculo Tarifa Basica
             self.pago = float((self.consumoBimestral.get() * 1.023))
-        elif self.consumoBimestral.get() > 75 and self.consumoBimestral.get() < 140: #Tarifa >75 y < 140 KwH
-            self.pago = float((self.tarifaBasico) + (self.consumoBimestral.get() - 75) * 1.24)
-       
+        elif self.consumoBimestral.get() > 150 and self.consumoBimestral.get() < 280: #Tarifa >150 y < 280 KwH Calculo Tarifa Intermedia
+            self.pago = float((self.tarifaBasico) + (self.consumoBimestral.get() - 150) * 1.24)
         return self.pagoTotal.set(round(float(self.pago * self.iva_vigente + (self.pago)),2)) #(Pago * IVA) + Pago Y se asigna el valor a la variable de la etiqueta pago total.
-    
+
     def crear_menu(self):
         menu_principal = Menu(self)
         submenu_archivo = Menu(menu_principal, tearoff=0)
@@ -78,13 +76,10 @@ class crearVentana(tk.Tk):
         self.quit() #Cerrar Ventana
         self.destroy() #Destruye Objeto
         sys.exit() #Termina el proceso
-        
+
 
 if __name__== "__main__":
     login_ventana = crearVentana()
     login_ventana.mainloop()
-   
-    
 
-    
 
