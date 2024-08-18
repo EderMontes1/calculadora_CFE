@@ -25,7 +25,7 @@ class crearVentana(tk.Tk):
 
         #Se modifica el titulo de la ventana
         self.title("Calculadora CFE")
-        self.iconbitmap("D:/Desarrollo/Python/apps/calculadora_CFE/logo_cfe.ico")
+        #self.iconbitmap("apps/calc_CFE/logo_cfe.ico")
         self.resizable(0,0)#Bloquear ventana 
         self._crearComponentes()
         self.crear_menu()
